@@ -1,0 +1,98 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>二级联动列表</title>
+<meta charset="utf-8" />
+<style>
+	.hide{ display: none; }
+</style>
+
+
+</head>
+<body>
+	<select name="provs">
+		<option>—请选择—</option><!--0-->
+		<option>北京市</option><!--1-->
+		<option>天津市</option>
+		<option>河北省</option>
+	</select>
+	<select name="cities" class="hide">
+	</select>
+  <script>
+
+	/*实现“省”和“市”的级联下拉列表*/
+	var cities=[
+      [{"name":'东城区',"value":101},
+       {"name":'西城区',"value":102},
+       {"name":'海淀区',"value":103},
+       {"name":'朝阳区',"value":104}],
+      [{"name":'河东区',"value":201},
+       {"name":'河西区',"value":202},
+       {"name":'南开区',"value":203}],
+      [{"name":'石家庄市',"value":301},
+       {"name":'廊坊市',"value":302},
+       {"name":'保定市',"value":303},
+       {"name":'唐山市',"value":304},
+       {"name":'秦皇岛市',"value":305}]
+	];
+    //找到 name=provs的 select
+      var sel=document.querySelector("[name=provs]");
+    //找到name=cities的select
+      var cts=document.querySelector("[name=cities]");
+      //为sel绑定onchange事件
+      sel.onchange=function (){
+          //一点就把class清空
+          cts.innerHTML="";
+          //找到对应的城市下标
+          var i=this.selectedIndex-1;
+          //如果i大于0 隐藏cts
+          if(i<0){cts.className="hide"}
+          else {
+              //获得一个省市对应的城市
+              var ct = cities[i];
+              //添加请选择
+              //var option = document.createElement("option");
+              //option.innerHTML = "-请选择-";
+
+              //优化简写
+              var option=new Option("-请选择-");
+              cts.appendChild(option);
+              //创建frag
+              var frag = document.createDocumentFragment();
+              //遍历每个城市
+              for (var i = 0; i < ct.length; i++) {
+                  //创建option
+                  //var option = document.createElement("option");
+                  //设置option的内容
+                  //option.innerHTML = ct[i]["name"];
+                  //option.value = ct[i]["value"];
+                  //优化简写
+                  var option=new Option(ct[i]["name"],ct[i]["value"]);
+
+                  //把option追加到cts中
+                  //cts.appendChild(option);
+                  //将option追加到frag中
+                  frag.appendChild(option);
+              }
+              //将frag追加到cts中
+              cts.appendChild(frag);
+              //将cts的hideclass置为空，将select显示出来 全部装好了一起展示
+              cts.className = "";
+          }
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

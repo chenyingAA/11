@@ -1,0 +1,51 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>navigator对象常用属性</title>
+<meta charset="utf-8" />
+
+</head>
+<body>
+	<script>
+	  if(navigator.cookieEnabled)
+      document.write("cookie已启用，请妥善保存个人信息!<br>");
+    else
+      document.write("cookie已禁用，记住密码功能无法使用!<br>");
+
+    function checkPlugin(pname){
+      if(navigator.plugins[pname])
+        document.write(
+          "已安装"+pname+"插件<br>")
+      else
+        document.write(
+          "未安装"+pname+"插件，<a href='#'>点此下载</a><br>")
+    }//练习6分钟,下课休息10分钟
+    checkPlugin("Shockwave Flash");
+    checkPlugin("Chrome PDF Viewer");
+    checkPlugin("YoukuAgent");
+
+    document.write(
+      navigator.userAgent+"<br>");
+    var ua=navigator.userAgent;
+    //鉴别当前浏览器的名称和版本号
+    var browser;
+    if(ua.indexOf("MSIE")!=-1)
+      browser="MSIE";
+    else if(ua.indexOf("Firefox")!=-1)
+      browser="Firefox";
+    else if(ua.indexOf("OPR")!=-1)
+      browser="OPR";
+    else if(ua.indexOf("Chrome")!=-1)
+      browser="Chrome";
+    else if(ua.indexOf("Safari")!=-1)
+      browser="Safari";
+    document.write(browser+"<br>");
+
+    var version;
+    var i=
+ ua.indexOf(browser)+browser.length+1;
+    version=parseFloat(ua.substr(i,3));
+    document.write(version);
+  </script>
+</body>
+</html>
